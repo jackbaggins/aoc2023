@@ -75,7 +75,6 @@ int main(int argc, char *argv[])
                 if (cubeColor == "red" || cubeColor == "red,")
                 {
                     maxRed = std::max(maxRed, cubeCount);
-                    // std::cout << maxRed << std::endl;
                 }
                 else if (cubeColor == "green" || cubeColor == "green,")
                 {
