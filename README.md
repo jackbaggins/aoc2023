@@ -31,6 +31,7 @@ Run With:
 `./d2p1 <inputfile> -R <red_int> -G <green_int> -B <blue_int>`
 
 Part 2:
+
 Able to reuse a large portion of the program for part 1. Removed a chunk of unneeded functionaltiy - and added in the multiplication and summation parts.
 
 Simple Build:
