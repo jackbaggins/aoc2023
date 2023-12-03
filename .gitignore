@@ -1,2 +1,5 @@
 **/input
 *input*
+.vscode
+**/build
+*test*
