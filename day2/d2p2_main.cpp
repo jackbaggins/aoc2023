@@ -3,6 +3,7 @@
 #include <sstream>
 #include <string>
 #include <algorithm>
+using namespace std;
 
 /*
     Essentially reusing the solution from part 1
@@ -21,14 +22,14 @@ int main(int argc, char *argv[])
 {
     if (argc != 2)
     {
-        std::cout << argc;
-        std::cerr << "Expects: " << argv[0] << " <inFilename>\n";
+        cout << argc;
+        cerr << "Expects: " << argv[0] << " <inFilename>\n";
         return 1;
     }
 
     // Pull input from first arg
-    std::ifstream inFile(argv[1]);
-    std::string line;
+    ifstream inFile(argv[1]);
+    string line;
     
     // Not sure how big the sum might be, but adding multiples on a dataset of this size could get large
     unsigned int powerCubes = 0, sumPowers = 0;
@@ -36,9 +37,9 @@ int main(int argc, char *argv[])
     // Start parse loop for each line
     while (getline(inFile, line))
     {
-        std::string gamePossible;
-        std::istringstream lineStream(line);
-        std::string textHolder;
+        string gamePossible;
+        istringstream lineStream(line);
+        string textHolder;
         int maxRed = 0, maxGreen = 0, maxBlue = 0, gameNumber = 0;
         
         // Extract the game number, and store for use later in gameNumber
@@ -52,21 +53,21 @@ int main(int argc, char *argv[])
         // ALSO ACCOUNT FOR COMMAS IN THE CUBE COLORS - THIS TOOK SO LONG TO FIGURE OUT...
         while (getline(lineStream, textHolder, ';'))
         {
-            std::istringstream colorStream(textHolder);
-            std::string cubeColor;
+            istringstream colorStream(textHolder);
+            string cubeColor;
             while (colorStream >> cubeCount >> cubeColor)
             {
                 if (cubeColor == "red" || cubeColor == "red,")
                 {
-                    maxRed = std::max(maxRed, cubeCount);
+                    maxRed = max(maxRed, cubeCount);
                 }
                 else if (cubeColor == "green" || cubeColor == "green,")
                 {
-                    maxGreen = std::max(maxGreen, cubeCount);
+                    maxGreen = max(maxGreen, cubeCount);
                 }
                 else if (cubeColor == "blue" || cubeColor == "blue,")
                 {
-                    maxBlue = std::max(maxBlue, cubeCount);
+                    maxBlue = max(maxBlue, cubeCount);
                 }
             }
         }
@@ -75,8 +76,8 @@ int main(int argc, char *argv[])
         powerCubes = (maxRed*maxGreen*maxBlue);
         sumPowers += powerCubes;
 
-        std::cout << "Game #" << gameNumber << " Max Red: " << maxRed << ", Max Green: " << maxGreen << ", Max Blue: " << maxBlue << ", Power: " << powerCubes << " Sum: " << sumPowers << std::endl;
+        cout << "Game #" << gameNumber << " Max Red: " << maxRed << ", Max Green: " << maxGreen << ", Max Blue: " << maxBlue << ", Power: " << powerCubes << " Sum: " << sumPowers << endl;
     }
-    std::cout << "Total Sum of Powers: " << sumPowers << std::endl;
+    cout << "Total Sum of Powers: " << sumPowers << endl;
     return 0;
 }
