@@ -43,4 +43,15 @@ Run With:
 _Ran/developed on Raspbian bullseye on Pi400._
 
 ## Day 3:
+Chosen solution: **C++**
 
+Part 1:
+This is probably the messiest thing anyone has ever seen. Essentially - create and array of strings, and while/if/for iterations through each row, column, and individual character to eventually get the solution. May or may not be able to re-use any of this for part 2...
+
+Simple Build:
+`g++ -o d2p2 d3p1_main.cpp`
+
+Run With:
+`./d3p1 <inputfile>`
+
+Part 2:

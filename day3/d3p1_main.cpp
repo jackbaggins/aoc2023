@@ -5,8 +5,11 @@
 using namespace std;
 
 /*
+    Referenced documentation that was helpful
     https://stackoverflow.com/questions/42754672/c-read-in-a-file-like-a-grid
     https://www.geeksforgeeks.org/how-to-concatenate-two-integer-values-into-one/
+    https://sentry.io/answers/char-to-int-in-c-and-cpp/
+
     Thought process/notes
     Pull all in to string vector (2d)
     Check each character in vector
@@ -54,56 +57,59 @@ int main(int argc, char *argv[])
     }
 
     int sumTotal = {};
+    // Each line of the inFile
     for (int i = 0; i < rowCount; i++)
     {
+        // Rows of array
         for (int j = 0; j < gridParts[i].length(); j++)
         {
-            // cout << gridParts[i][j];
+            // Columns of array
             if (isNumber(gridParts[i][j]))
             {
                 int capture = {};
                 int toSum = {};
+
+                // If a number is hit, start accumulating it
                 while (j < gridParts[i].size() && isNumber(gridParts[i][j]))
                 {
-                    capture = capture * 10 + (gridParts[i][j] - '0'); // Convert char to int and append
+                    // Subract 0 is ASCII convert char to int https://sentry.io/answers/char-to-int-in-c-and-cpp
+                    capture = capture * 10 + (gridParts[i][j] - '0');
+
+                    // For each number that's hit, check all 8 sides
+                    // Also account for bounds - idk if this is the best way to do this, gave headache
                     for (int di = -1; di <= 1; ++di)
                     {
                         for (int dj = -1; dj <= 1; ++dj)
                         {
-                            // Skip the center cell
+                            // Don't check the grabbed number - both [i][j] with no -- or ++
                             if (di == 0 && dj == 0)
                                 continue;
 
                             int newI = i + di;
                             int newJ = j + dj;
 
-                            // Check bounds
+                            // Check bounds - newI and newJ are negative, we're outside the array - segfault
                             if (newI >= 0 && newI < gridParts.size() && newJ >= 0 && newJ < gridParts[newI].size())
                             {
-                                // Now it's safe to access grid[newI][newJ]
+                                // Safe to access the adjacent value
+                                // Set toSum to 1, because the number touches a symbol
                                 if (isSymbol(gridParts[newI][newJ]))
                                 {
                                     toSum = 1;
-                                    // cout << "hit" << endl;
                                 }
                             }
                         }
                     }
                     j++;
-
                 }
+                // If the number touched a symbol (toSum == 1), add the accumulated integer to a running total
                 if (toSum == 1)
                 {
-                    // cout << capture << endl;
                     sumTotal = sumTotal + capture;
                     toSum = 0;
                 }
-                // cout << "Captured: " << capture << endl;
-                
             }
-            
         }
-        
     }
     cout << "Total: " << sumTotal << endl;
 
