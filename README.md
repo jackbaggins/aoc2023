@@ -66,3 +66,13 @@ Simple Build:
 
 Run With:
 `/d3p2 <inputfile>`
+
+## Day 4:
+Chosen Solution: **Python**
+
+### Part 1:
+
+Went with Python this round. String manipulation in C++ was taking entirely too much effort. Python has some native things to handle this in a smaller amount of code (significantly smaller).
+
+Run with:
+`python d4p1_main.py <inputfile>`
